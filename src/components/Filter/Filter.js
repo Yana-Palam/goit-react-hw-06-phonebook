@@ -1,21 +1,31 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { getValueFilter } from 'redux/filters/filtersSelectors';
+import { setValueFilters } from 'redux/filters/filtersSlice';
 import { nanoid } from 'nanoid';
 import { Wrapper, Label, Input } from './Filter.styled';
 
-const Filter = ({ value, onChange }) => {
+const Filter = () => {
+  const dispatch = useDispatch();
+  const value = useSelector(getValueFilter);
+
+  const handleChange = e => {
+    const value = e.target.value;
+    dispatch(setValueFilters(value));
+  };
+
   const findInputId = nanoid();
   return (
     <Wrapper>
       <Label htmlFor={findInputId}>Find contacts by name</Label>
-      <Input id={findInputId} type="text" value={value} onChange={onChange} />
+      <Input
+        id={findInputId}
+        type="text"
+        value={value}
+        onChange={handleChange}
+      />
     </Wrapper>
   );
-};
-
-Filter.propTypes = {
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
 };
 
 export default Filter;

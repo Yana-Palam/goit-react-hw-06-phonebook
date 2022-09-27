@@ -16,8 +16,3 @@ export const TitlePhonebook = styled.h1`
 export const TitleContacts = styled.h2`
   font-size: 32px;
 `;
-
-export const Message = styled.p`
-  margin-top: 10px;
-  font-size: 30px;
-`;
